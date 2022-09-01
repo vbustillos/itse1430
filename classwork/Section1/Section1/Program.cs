@@ -21,7 +21,7 @@ bool isPassing;
 string name;
 string firstName = "Bob", lastName = "Smith";
 
-firstName = lastName = name;
+//firstName = lastName = name;
 //firstName = "Sam";
 //lastName = "Sam";
 
@@ -33,9 +33,9 @@ firstName = lastName = name;
 
 
 //Block Statement
-{
-    decimal payRate;
-}
+//{
+//    decimal payRate;
+//}
 
 //distanceFromMoon = 10.5;
 isPassing = distanceFromMoon > 10;

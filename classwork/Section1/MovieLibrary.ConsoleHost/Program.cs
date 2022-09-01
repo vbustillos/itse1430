@@ -6,9 +6,47 @@ int releaseYear = 1900;
 string rating = "";
 bool isClassic = false;
 
-Console.WriteLine("Enter a title: ");
-Console.WriteLine("Enter an optional description: ");
-Console.WriteLine("Enter a run length (in Minutes): ");
-Console.WriteLine("Enter the release year: ");
-Console.WriteLine("Enter the MPAA rating: ");
-Console.WriteLine("Is this a classic? ");
+AddMovie();
+
+int ReadInt32 ( string message )
+{
+    Console.Write(message);
+
+    string value = Console.ReadLine();
+
+    //int result;
+    //return Int32.Parse(value);
+    //if (Int32.TryParse(value, out result))
+    //    return result;
+
+    //Inline variable declarations
+    if (Int32.TryParse(value, out int result))
+        return result;
+
+    //TODO: Loop
+    return -1;
+}
+
+string ReadString ( string message )
+{
+    Console.Write(message);
+
+    string value = Console.ReadLine();
+
+    return value;
+}
+
+void AddMovie ()
+{
+    title = ReadString("Enter a title: ");
+
+    description = ReadString("Enter an optional description: ");
+
+    runLength = ReadInt32("Enter a run length (in Minutes): ");
+
+    releaseYear = ReadInt32("Enter the release year: ");
+
+    rating = ReadString("Enter the MPAA rating: ");
+
+    Console.WriteLine("Is this a classic? ");
+}
