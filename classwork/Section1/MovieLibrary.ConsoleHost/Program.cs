@@ -8,6 +8,21 @@ bool isClassic = false;
 
 AddMovie();
 
+bool ReadBoolean (string message)
+{
+    Console.Write(message);
+
+    //Looking for Y/N
+    ConsoleKeyInfo key= Console.ReadKey();
+    if(key.Key == ConsoleKey.Y)
+        return true;
+    else if (key.Key == ConsoleKey.N)
+        return false;
+
+    //TODO: error
+    return false;
+}
+
 int ReadInt32 ( string message )
 {
     Console.Write(message);
@@ -27,26 +42,36 @@ int ReadInt32 ( string message )
     return -1;
 }
 
-string ReadString ( string message )
+string ReadString ( string message, bool required )
 {
     Console.Write(message);
 
-    string value = Console.ReadLine();
+    while (true)
+    {
+        string value = Console.ReadLine();
 
-    return value;
+        //Check if required
+        if (value != "" && !required)
+            return value;
+
+
+        //value is empty and required
+        Console.WriteLine("Value is required");
+    };
 }
 
 void AddMovie ()
 {
-    title = ReadString("Enter a title: ");
+    title = ReadString("Enter a title: ", true);
 
-    description = ReadString("Enter an optional description: ");
+    description = ReadString("Enter an optional description: ", false);
 
     runLength = ReadInt32("Enter a run length (in Minutes): ");
 
     releaseYear = ReadInt32("Enter the release year: ");
 
-    rating = ReadString("Enter the MPAA rating: ");
+    rating = ReadString("Enter the MPAA rating: ", true);
 
-    Console.WriteLine("Is this a classic? ");
+    isClassic = ReadBoolean("Is this a classic?");
+
 }
