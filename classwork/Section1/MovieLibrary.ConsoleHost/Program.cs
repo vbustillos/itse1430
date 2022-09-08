@@ -23,23 +23,33 @@ bool ReadBoolean (string message)
     return false;
 }
 
-int ReadInt32 ( string message )
+int ReadInt32 ( string message, int minimumValue, int maximumValue )
 {
     Console.Write(message);
 
-    string value = Console.ReadLine();
+    do
+    { 
+        string value = Console.ReadLine();
 
-    //int result;
-    //return Int32.Parse(value);
-    //if (Int32.TryParse(value, out result))
-    //    return result;
+        //int result;
+        //return Int32.Parse(value);
+        //if (Int32.TryParse(value, out result))
+        //    return result;
 
-    //Inline variable declarations
-    if (Int32.TryParse(value, out int result))
-        return result;
+        //Inline variable declarations
+        if (Int32.TryParse(value, out int result))
+        {
+            if (result >= minimumValue && result <= maximumValue)
+            return result;
+        };
 
-    //TODO: Loop
-    return -1;
+        // if (false)
+            // break;       //Exit Loop
+            // continue;       //Exit Iteration
+
+        Console.WriteLine("Value must be between " + minimumValue + " and " + maximumValue);
+    } while (true);
+
 }
 
 string ReadString ( string message, bool required )
@@ -51,7 +61,7 @@ string ReadString ( string message, bool required )
         string value = Console.ReadLine();
 
         //Check if required
-        if (value != "" && !required)
+        if (value != "" || !required)
             return value;
 
 
@@ -66,9 +76,9 @@ void AddMovie ()
 
     description = ReadString("Enter an optional description: ", false);
 
-    runLength = ReadInt32("Enter a run length (in Minutes): ");
+    runLength = ReadInt32("Enter a run length (in Minutes): ", 0, 300);
 
-    releaseYear = ReadInt32("Enter the release year: ");
+    releaseYear = ReadInt32("Enter the release year: ", 1900, 2100);
 
     rating = ReadString("Enter the MPAA rating: ", true);
 
