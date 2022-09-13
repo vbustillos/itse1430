@@ -52,3 +52,19 @@ Console.WriteLine(y);
 
 Console.WriteLine(y--);
 Console.WriteLine(y);
+
+//Strings - in C#, everything normalizes to a string
+
+string emptyString = "";            //length of 0 - no characters
+string emptyString2 = String.Empty;     //Also of length of 0 - no characters
+bool areEmptyStringsEqual = emptyString == emptyString2;
+string nullString = null;               //does not have a value - these are bad, will cause problems
+bool isEmptyString = (emptyString == null) || (emptyString =="");       //do not use this to check for empty string
+isEmptyString = String.IsNullOrEmpty(emptyString);      //way to check to see if a string is null or empty
+
+//String Literals
+string someString = "Hello World";          // backslash is used as an escape sequence, translates to actual character \" \n \t \\
+string filePath = "C:\\windows\\system32";
+
+//verbatim
+filePath = @"C:\windows\system32";
