@@ -13,7 +13,9 @@ bool done = false;
 
 do
 {
-    MenuOption input = DisplayMenu();
+    //Type inferencing - compiler figures out type based upon context
+    //MenuOption input = DisplayMenu();
+    var input = DisplayMenu();                          //to be used when type is unknown and will be determined at compulation
     Console.WriteLine();
 
     switch(input)
@@ -68,6 +70,8 @@ void DisplayInformation()
 MenuOption DisplayMenu()
 {
     Console.WriteLine();
+    //Console.WriteLine("---------");
+    Console.WriteLine("".PadLeft(10, '-'));
     Console.WriteLine("A)dd Movie");
     Console.WriteLine("E)dit Movie");
     Console.WriteLine("V)iew Movie");
@@ -201,10 +205,20 @@ void ViewMovie ()
         return;
     };
 
-    Console.WriteLine(title);
-    Console.WriteLine(releaseYear);
-    Console.WriteLine("Length: " + runLength + " mins");
-    Console.WriteLine("MPAA Rating: " + rating + " rating");
-    Console.WriteLine("Classic: " + isClassic);
+    //String Formatting
+    //Option 1 - concatenation
+    //Console.WriteLine("Length: " + runLength + " mins"); ----> Console.WriteLine(String.Concat("Length: ", runLength, " mins"));
+
+    //Option 2 - String.Format
+    //Console.WriteLine("Length: " + runLength + " mins"); ----> Console.WriteLine(String.Format("Length: {0} mins ", runLength));
+
+    //Option 3 - String Interpolation (Only works with string literals)
+    //Console.WriteLine(String.Format("Length: {0} mins ", runLength)); ----> Console.WriteLine($"Length: {runLength} mins");
+    Console.WriteLine($"{title} ({releaseYear})");
+    //Console.WriteLine(releaseYear);             //behind the scenes, the system is reading as Console.WriteLine(releaseYear.ToString());
+    //ORIGINAL: Console.WriteLine("Length: " + runLength + " mins");
+    Console.WriteLine($"Length: {runLength} mins ");
+    Console.WriteLine($"Rated: {rating}");
+    Console.WriteLine($"This movie {(isClassic ? "Is" : "Is Not")} considered a classic.");
     Console.WriteLine(description);
 }
