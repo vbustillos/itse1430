@@ -71,3 +71,14 @@ enum OperatingSystemOption
     LinuxRedHat,
 }
 
+enum ModifyOrderOption
+{
+    Processor = 1,
+    Memory,
+    PrimaryStorage,
+    SecondaryStorage,
+    GraphicsCard,
+    OperatingSystem,
+    None,
+}
+
