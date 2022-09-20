@@ -6,57 +6,112 @@
 
 using System;
 
-Console.WriteLine("Valerie Bustillos");
-Console.WriteLine("ITSE 1430 2022FL");
-Console.WriteLine("September 21, 2022");
+DisplayProgramInfo();
 
-decimal cartTotal = 0;
-DisplayMenu();
-
-int menuChoice;
-
-menuChoice = MenuSelection(0,0);
-
-ProcessMenuSelection(menuChoice);
-
-void DisplayMenu ()
+do
 {
-    int menuOptionsQuit = 0;
+    DisplayCartTotal();
+    Console.WriteLine();
 
-    Console.WriteLine("Your Current Cart Total is: $" + cartTotal);
-    Console.WriteLine("Program Menu");
-    Console.WriteLine(menuOptionsQuit + " - Quit");
+    MenuOption input = DisplayMenu();
+    switch(input)
+    {
+        case MenuOption.New:
+        {
+            BuildNewOrder();
+            break;
+        }
+        case MenuOption.View:
+        {
+            break;
+        }
+        case MenuOption.Modify:
+        {
+            break;
+        }
+        case MenuOption.Clear:
+        {
+            break;
+        }
+        case MenuOption.Quit:
+        {
+            Quit();
+            break;
+        }
+    }
+} while (true);
+
+MenuOption DisplayMenu ()
+{
     
-}
 
-int MenuSelection (int minimumValue, int maximumValue)
-{
-    Console.WriteLine("Select an option from the menu:");
+    Console.WriteLine("Your Current Cart Total is: $");
+    Console.WriteLine("Program Menu");
+    Console.WriteLine("N - Start A New Order");
+    Console.WriteLine("V - View Order");
+    Console.WriteLine("C - Clear Order");
+    Console.WriteLine("M - Modify Order");
+    Console.WriteLine("Q - Quit");
+    
     do
     {
-        string value = Console.ReadLine();
-
-        if (Int32.TryParse(value, out int result))
+        ConsoleKeyInfo key = Console.ReadKey(true);
+        switch (key.Key)
         {
-            if (result >= minimumValue && result <= maximumValue)
-                return result;
-        }
-        Console.WriteLine("You must selection an option from the menu");
-    } while (true);    
+            case ConsoleKey.N: return MenuOption.New;
+            case ConsoleKey.V: return MenuOption.View;
+            case ConsoleKey.M: return MenuOption.Modify;
+            case ConsoleKey.C: return MenuOption.Clear;
+            case ConsoleKey.Q: return MenuOption.Quit;
+        };
+    } while (true);
+
 }
 
-void ProcessMenuSelection (int menuChoice)
+void BuildNewOrder ()
 {
-    if (menuChoice == 0)
-    {
-        
-        Console.WriteLine("Are you sure you want to quit? (Y/N)");
-        ConsoleKeyInfo confirmQuit = Console.ReadKey();
-       
-        while (confirmQuit.Key != ConsoleKey.Y)
-            MenuSelection(0, 0);
-        if (confirmQuit.Key == ConsoleKey.Y)
-            System.Environment.Exit(0);        
-    }
+    Console.WriteLine("Select your Processor:");
+    Console.WriteLine("AMD Ryzen 9 5900X\t$1410".PadRight(40,' '));
+    Console.WriteLine("AMD Ryzen 7 5700X\t$1270".PadRight(40,' '));
+    Console.WriteLine("AMD Ryzen 5 5600X\t$1200".PadRight(40, ' '));
+    Console.WriteLine("Intel i9-12900K\t$1590".PadRight(40, ' '));
+    Console.WriteLine("Intel i7-12700K\t$1400".PadRight(40, ' '));
+    Console.WriteLine("Intel i5-12600K\t$1280".PadRight(40, ' '));
+    CalculateCartTotal();
+}
 
+decimal CalculateCartTotal ()
+{
+    decimal cartTotal = 0;
+    decimal processorCost = 0;
+    decimal memoryCost = 0;
+
+    cartTotal = processorCost + memoryCost;
+
+    return cartTotal;
+
+}
+
+void Quit()
+{
+    Console.WriteLine("Are you sure you want to quit the program (Y/N)?");
+        
+
+    ConsoleKeyInfo key = Console.ReadKey();
+    if (key.Key == ConsoleKey.Y)
+        Environment.Exit(0);
+    else
+        return;
+}
+
+void DisplayCartTotal ()
+{
+    Console.WriteLine(CalculateCartTotal());
+}
+
+void DisplayProgramInfo ()
+{
+    Console.WriteLine("Valerie Bustillos");
+    Console.WriteLine("ITSE 1430 2022FL");
+    Console.WriteLine("September 21, 2022");
 }
