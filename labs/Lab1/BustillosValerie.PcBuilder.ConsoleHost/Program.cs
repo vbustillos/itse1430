@@ -209,7 +209,7 @@ GraphicCardOption SelectGraphicCard()
     Console.WriteLine("B - GeForce RTX 2070\t$400".PadRight(20, ' '));
     Console.WriteLine("C - Radeon RX 6600\t$300".PadRight(20, ' '));
     Console.WriteLine("D - Radeon RX 5600\t$325".PadRight(20, ' '));
-    Console.WriteLine("N - None\t$0".PadRight(20, ' '));
+    Console.WriteLine("N - None\t\t$0".PadRight(20, ' '));
 
     do
     {
@@ -277,7 +277,7 @@ void ClearOrder()
         Console.WriteLine("You do not have a current order saved in your cart.");
         return;
     }
-    if (!ReadBoolean("Are you sure you want to clear your cart? (Y/N)"))
+    if (!ReadBoolean("Are you sure you want to clear your cart? (Y/N)\n"))
         return;
     processor = "";
     processorPrice = 0;
@@ -298,263 +298,271 @@ void DisplayProgramInfo ()
 void ModifyOrder()
 {
     if (processor == "")
-        Console.WriteLine("You do not currently have an order saved in your cart.");
+        Console.WriteLine("You do not currently have an order saved in your cart.\n");
     else
     {
-
-        ModifyOrderOption component = SelectModification();
-        switch (component)
+        
+        do
         {
-            case ModifyOrderOption.Processor:
+            ModifyOrderOption component = SelectModification();
+            switch (component)
             {
-                ProcessorOption processorSelected = SelectProcessor();
+                case ModifyOrderOption.Processor:
+                {
+                    ProcessorOption processorSelected = SelectProcessor();
 
-                switch (processorSelected)
-                {
-                    case ProcessorOption.AMD1:
+                    switch (processorSelected)
                     {
-                        processor = "AMD Ryzen 9 5900X";
-                        processorPrice = 1410;
-                        break;
+                        case ProcessorOption.AMD1:
+                        {
+                            processor = "AMD Ryzen 9 5900X";
+                            processorPrice = 1410;
+                            break;
+                        }
+                        case ProcessorOption.AMD2:
+                        {
+                            processor = "AMD Ryzen 7 5700X";
+                            processorPrice = 1270;
+                            break;
+                        }
+                        case ProcessorOption.AMD3:
+                        {
+                            processor = "AMD Ryzen 5 5600X";
+                            processorPrice = 1200;
+                            break;
+                        }
+                        case ProcessorOption.Intel1:
+                        {
+                            processor = "Intel i9-12900";
+                            processorPrice = 1590;
+                            break;
+                        }
+                        case ProcessorOption.Intel2:
+                        {
+                            processor = "Intel i7-12700";
+                            processorPrice = 1400;
+                            break;
+                        }
+                        case ProcessorOption.Intel3:
+                        {
+                            processor = "Intel i5-12600";
+                            processorPrice = 1280;
+                            break;
+                        }
                     }
-                    case ProcessorOption.AMD2:
-                    {
-                        processor = "AMD Ryzen 7 5700X";
-                        processorPrice = 1270;
-                        break;
-                    }
-                    case ProcessorOption.AMD3:
-                    {
-                        processor = "AMD Ryzen 5 5600X";
-                        processorPrice = 1200;
-                        break;
-                    }
-                    case ProcessorOption.Intel1:
-                    {
-                        processor = "Intel i9-12900";
-                        processorPrice = 1590;
-                        break;
-                    }
-                    case ProcessorOption.Intel2:
-                    {
-                        processor = "Intel i7-12700";
-                        processorPrice = 1400;
-                        break;
-                    }
-                    case ProcessorOption.Intel3:
-                    {
-                        processor = "Intel i5-12600";
-                        processorPrice = 1280;
-                        break;
-                    }
+                    break;
                 }
-                break;
-            }
-            case ModifyOrderOption.Memory:
-            {
-                MemoryOption memorySelected = SelectMemory();
-                switch (memorySelected)
+                case ModifyOrderOption.Memory:
                 {
-                    case MemoryOption.EightGB:
+                    MemoryOption memorySelected = SelectMemory();
+                    switch (memorySelected)
                     {
-                        memory = "8 GB";
-                        memoryPrice = 30;
-                        break;
+                        case MemoryOption.EightGB:
+                        {
+                            memory = "8 GB";
+                            memoryPrice = 30;
+                            break;
+                        }
+                        case MemoryOption.SixteenGB:
+                        {
+                            memory = "16 GB";
+                            memoryPrice = 40;
+                            break;
+                        }
+                        case MemoryOption.ThirtyTwoGB:
+                        {
+                            memory = "32 GB";
+                            memoryPrice = 90;
+                            break;
+                        }
+                        case MemoryOption.SixtyFourGB:
+                        {
+                            memory = "64 GB";
+                            memoryPrice = 410;
+                            break;
+                        }
+                        case MemoryOption.OneTwentyEightGB:
+                        {
+                            memory = "128 GB";
+                            memoryPrice = 600;
+                            break;
+                        }
                     }
-                    case MemoryOption.SixteenGB:
-                    {
-                        memory = "16 GB";
-                        memoryPrice = 40;
-                        break;
-                    }
-                    case MemoryOption.ThirtyTwoGB:
-                    {
-                        memory = "32 GB";
-                        memoryPrice = 90;
-                        break;
-                    }
-                    case MemoryOption.SixtyFourGB:
-                    {
-                        memory = "64 GB";
-                        memoryPrice = 410;
-                        break;
-                    }
-                    case MemoryOption.OneTwentyEightGB:
-                    {
-                        memory = "128 GB";
-                        memoryPrice = 600;
-                        break;
-                    }
+                    break;
                 }
-                break;
-            }
-            case ModifyOrderOption.PrimaryStorage:
-            {
-                PrimaryStorageOption primaryStorageSelected = SelectPrimaryStorage();
-                switch (primaryStorageSelected)
+                case ModifyOrderOption.PrimaryStorage:
                 {
-                    case PrimaryStorageOption.SSD256GB:
+                    PrimaryStorageOption primaryStorageSelected = SelectPrimaryStorage();
+                    switch (primaryStorageSelected)
                     {
-                        primaryStorage = "SSD 256 GB";
-                        primaryStoragePrice = 90;
-                        break;
-                    }
-                    case PrimaryStorageOption.SSD512GB:
-                    {
-                        primaryStorage = "SSD 512 GB";
-                        primaryStoragePrice = 100;
-                        break;
-                    }
-                    case PrimaryStorageOption.SSD1TB:
-                    {
-                        primaryStorage = "SSD 1 TB";
-                        primaryStoragePrice = 125;
-                        break;
-                    }
-                    case PrimaryStorageOption.SSD2TB:
-                    {
-                        primaryStorage = "SSD 2 TB";
-                        primaryStoragePrice = 230;
-                        break;
-                    }
+                        case PrimaryStorageOption.SSD256GB:
+                        {
+                            primaryStorage = "SSD 256 GB";
+                            primaryStoragePrice = 90;
+                            break;
+                        }
+                        case PrimaryStorageOption.SSD512GB:
+                        {
+                            primaryStorage = "SSD 512 GB";
+                            primaryStoragePrice = 100;
+                            break;
+                        }
+                        case PrimaryStorageOption.SSD1TB:
+                        {
+                            primaryStorage = "SSD 1 TB";
+                            primaryStoragePrice = 125;
+                            break;
+                        }
+                        case PrimaryStorageOption.SSD2TB:
+                        {
+                            primaryStorage = "SSD 2 TB";
+                            primaryStoragePrice = 230;
+                            break;
+                        }
 
+                    }
+                    break;
                 }
-                break;
-            }
-            case ModifyOrderOption.SecondaryStorage:
-            {
-                SecondaryStorageOption secondaryStorageSelected = SelectSecondaryStorage();
-                switch (secondaryStorageSelected)
+                case ModifyOrderOption.SecondaryStorage:
                 {
-                    case SecondaryStorageOption.HDD1:
+                    SecondaryStorageOption secondaryStorageSelected = SelectSecondaryStorage();
+                    switch (secondaryStorageSelected)
                     {
-                        secondaryStorage = "HDD 1 TB";
-                        secondaryStoragePrice = 40;
-                        break;
+                        case SecondaryStorageOption.HDD1:
+                        {
+                            secondaryStorage = "HDD 1 TB";
+                            secondaryStoragePrice = 40;
+                            break;
+                        }
+                        case SecondaryStorageOption.HDD2:
+                        {
+                            secondaryStorage = "HDD 2 TB";
+                            secondaryStoragePrice = 50;
+                            break;
+                        }
+                        case SecondaryStorageOption.HDD4:
+                        {
+                            secondaryStorage = "HDD 2 TB";
+                            secondaryStoragePrice = 70;
+                            break;
+                        }
+                        case SecondaryStorageOption.SSD512:
+                        {
+                            secondaryStorage = "SSD 512 GB";
+                            secondaryStoragePrice = 100;
+                            break;
+                        }
+                        case SecondaryStorageOption.SSD1:
+                        {
+                            secondaryStorage = "SSD 1 TB";
+                            secondaryStoragePrice = 125;
+                            break;
+                        }
+                        case SecondaryStorageOption.SSD2:
+                        {
+                            secondaryStorage = "SSD 2 TB";
+                            secondaryStoragePrice = 230;
+                            break;
+                        }
+                        case SecondaryStorageOption.None:
+                        {
+                            secondaryStorage = "None Selected";
+                            secondaryStoragePrice = 0;
+                            break;
+                        }
                     }
-                    case SecondaryStorageOption.HDD2:
-                    {
-                        secondaryStorage = "HDD 2 TB";
-                        secondaryStoragePrice = 50;
-                        break;
-                    }
-                    case SecondaryStorageOption.HDD4:
-                    {
-                        secondaryStorage = "HDD 2 TB";
-                        secondaryStoragePrice = 70;
-                        break;
-                    }
-                    case SecondaryStorageOption.SSD512:
-                    {
-                        secondaryStorage = "SSD 512 GB";
-                        secondaryStoragePrice = 100;
-                        break;
-                    }
-                    case SecondaryStorageOption.SSD1:
-                    {
-                        secondaryStorage = "SSD 1 TB";
-                        secondaryStoragePrice = 125;
-                        break;
-                    }
-                    case SecondaryStorageOption.SSD2:
-                    {
-                        secondaryStorage = "SSD 2 TB";
-                        secondaryStoragePrice = 230;
-                        break;
-                    }
-                    case SecondaryStorageOption.None:
-                    {
-                        secondaryStorage = "None Selected";
-                        secondaryStoragePrice = 0;
-                        break;
-                    }
+                    break;
                 }
-                break;
-            }
-            case ModifyOrderOption.GraphicsCard:
-            {
-                GraphicCardOption graphicCardSelected = SelectGraphicCard();
-                switch (graphicCardSelected)
+                case ModifyOrderOption.GraphicsCard:
                 {
-                    case GraphicCardOption.GeForceRTX3070:
+                    GraphicCardOption graphicCardSelected = SelectGraphicCard();
+                    switch (graphicCardSelected)
                     {
-                        graphicsCard = "GeForce RTX 3070";
-                        graphicsCardPrice = 580;
-                        break;
+                        case GraphicCardOption.GeForceRTX3070:
+                        {
+                            graphicsCard = "GeForce RTX 3070";
+                            graphicsCardPrice = 580;
+                            break;
+                        }
+                        case GraphicCardOption.GeForceRTX2070:
+                        {
+                            graphicsCard = "GeForce RTX 2070";
+                            graphicsCardPrice = 400;
+                            break;
+                        }
+                        case GraphicCardOption.RadeonRX6600:
+                        {
+                            graphicsCard = "Radeon RX 6600";
+                            graphicsCardPrice = 300;
+                            break;
+                        }
+                        case GraphicCardOption.RadeonRX5600:
+                        {
+                            graphicsCard = "Radeon RX 5600";
+                            graphicsCardPrice = 325;
+                            break;
+                        }
+                        case GraphicCardOption.None:
+                        {
+                            graphicsCard = "None Selected";
+                            graphicsCardPrice = 0;
+                            break;
+                        }
                     }
-                    case GraphicCardOption.GeForceRTX2070:
-                    {
-                        graphicsCard = "GeForce RTX 2070";
-                        graphicsCardPrice = 400;
-                        break;
-                    }
-                    case GraphicCardOption.RadeonRX6600:
-                    {
-                        graphicsCard = "Radeon RX 6600";
-                        graphicsCardPrice = 300;
-                        break;
-                    }
-                    case GraphicCardOption.RadeonRX5600:
-                    {
-                        graphicsCard = "Radeon RX 5600";
-                        graphicsCardPrice = 325;
-                        break;
-                    }
-                    case GraphicCardOption.None:
-                    {
-                        graphicsCard = "None";
-                        graphicsCardPrice = 0;
-                        break;
-                    }
+                    break;
                 }
-                break;
-            }
-            case ModifyOrderOption.OperatingSystem:
-            {
-                OperatingSystemOption operatingSystemSelected = SelectOperatingSystem();
-                switch (operatingSystemSelected)
+                case ModifyOrderOption.OperatingSystem:
                 {
-                    case OperatingSystemOption.Windows11Home:
+                    OperatingSystemOption operatingSystemSelected = SelectOperatingSystem();
+                    switch (operatingSystemSelected)
                     {
-                        operatingSystem = "Windows 11 Home";
-                        operatingSystemPrice = 140;
-                        break;
+                        case OperatingSystemOption.Windows11Home:
+                        {
+                            operatingSystem = "Windows 11 Home";
+                            operatingSystemPrice = 140;
+                            break;
+                        }
+                        case OperatingSystemOption.Windows11Pro:
+                        {
+                            operatingSystem = "Windows 11 Pro";
+                            operatingSystemPrice = 160;
+                            break;
+                        }
+                        case OperatingSystemOption.Windows10Home:
+                        {
+                            operatingSystem = "Windows 10 Home";
+                            operatingSystemPrice = 150;
+                            break;
+                        }
+                        case OperatingSystemOption.Windows10Pro:
+                        {
+                            operatingSystem = "Windows 10 Pro";
+                            operatingSystemPrice = 170;
+                            break;
+                        }
+                        case OperatingSystemOption.LinuxFedora:
+                        {
+                            operatingSystem = "Linux (Fedora)";
+                            operatingSystemPrice = 20;
+                            break;
+                        }
+                        case OperatingSystemOption.LinuxRedHat:
+                        {
+                            operatingSystem = "Linux (Red Hat)";
+                            operatingSystemPrice = 60;
+                            break;
+                        }
                     }
-                    case OperatingSystemOption.Windows11Pro:
-                    {
-                        operatingSystem = "Windows 11 Pro";
-                        operatingSystemPrice = 160;
-                        break;
-                    }
-                    case OperatingSystemOption.Windows10Home:
-                    {
-                        operatingSystem = "Windows 10 Home";
-                        operatingSystemPrice = 150;
-                        break;
-                    }
-                    case OperatingSystemOption.Windows10Pro:
-                    {
-                        operatingSystem = "Windows 10 Pro";
-                        operatingSystemPrice = 170;
-                        break;
-                    }
-                    case OperatingSystemOption.LinuxFedora:
-                    {
-                        operatingSystem = "Linux (Fedora)";
-                        operatingSystemPrice = 20;
-                        break;
-                    }
-                    case OperatingSystemOption.LinuxRedHat:
-                    {
-                        operatingSystem = "Linux (Red Hat)";
-                        operatingSystemPrice = 60;
-                        break;
-                    }
+                    break;
+                }
+                case ModifyOrderOption.None:
+                {
+                    break;                    
                 }
             }
-            break;
+            
+        } while (ReadBoolean("Would you like to modify another item in your cart (Y/N)\n\n"));
 
-        }
     }
 }
 
@@ -796,7 +804,7 @@ void NewOrder ()
 
 void Quit ()
 {
-    if (ReadBoolean("Are you sure you want to quit (Y/N)?"))
+    if (ReadBoolean("Are you sure you want to quit (Y/N)?\n"))
         Environment.Exit(0);
     else
         return;
