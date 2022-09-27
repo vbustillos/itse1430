@@ -176,18 +176,20 @@ Movie AddMovie ()
 {
     Movie movie = new Movie ();
 
+    //string title ="";
     //movie.title = ReadString("Enter a title: ", true);
-    movie.SetTitle(ReadString("Enter a title: ", true));
+    //movie.SetTitle(ReadString("Enter a title: ", true));
+    movie.Title = ReadString("Enter a title: ", true);
 
-    movie._description = ReadString("Enter an optional description: ", false);
+    movie.Description = ReadString("Enter an optional description: ", false);
 
-    movie._runLength = ReadInt32("Enter a run length (in Minutes): ", 0, 300);
+    movie.RunLength = ReadInt32("Enter a run length (in Minutes): ", 0, 300);
 
-    movie._releaseYear = ReadInt32("Enter the release year: ", 1900, 2100);
+    movie.ReleaseYear = ReadInt32("Enter the release year: ", 1900, 2100);
 
-    movie._rating = ReadString("Enter the MPAA rating: ", true);
+    movie.Rating = ReadString("Enter the MPAA rating: ", true);
 
-    movie._isClassic = ReadBoolean("Is this a classic?");
+    movie.IsClassic = ReadBoolean("Is this a classic?");
 
     return movie;
 }
@@ -205,7 +207,7 @@ void DeleteMovie ()
         return;
 
     //not confirmed
-    if (!ReadBoolean($"Are you sure you want to delete the '{selectedMovie.GetTitle()}' (Y/N)?"))
+    if (!ReadBoolean($"Are you sure you want to delete the '{selectedMovie.Title}' (Y/N)?"))
         return;
 
     //TODO: Delete Movie
@@ -232,11 +234,14 @@ void ViewMovie (Movie movie)
 
     //Option 3 - String Interpolation (Only works with string literals)
     //Console.WriteLine(String.Format("Length: {0} mins ", runLength)); ----> Console.WriteLine($"Length: {runLength} mins");
-    Console.WriteLine($"{movie.GetTitle()} ({movie._releaseYear})");
+    Console.WriteLine($"{movie.Title} ({movie.ReleaseYear})");
     //Console.WriteLine(releaseYear);             //behind the scenes, the system is reading as Console.WriteLine(releaseYear.ToString());
     //ORIGINAL: Console.WriteLine("Length: " + runLength + " mins");
-    Console.WriteLine($"Length: {movie._runLength} mins ");
-    Console.WriteLine($"Rated: {movie._rating}");
-    Console.WriteLine($"This movie {(movie._isClassic ? "Is" : "Is Not")} considered a classic.");
-    Console.WriteLine(movie._description);
+    Console.WriteLine($"Length: {movie.RunLength} mins ");
+    Console.WriteLine($"Rated: {movie.Rating}");
+    Console.WriteLine($"This movie {(movie.IsClassic ? "Is" : "Is Not")} considered a classic.");
+    Console.WriteLine(movie.Description);
+
+    var blackAndWhite = movie.IsBlackAndWhite;
+    //movie.IsBlackAndWhite = true;
 }
