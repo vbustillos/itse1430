@@ -16,6 +16,8 @@ using MovieLibrary;
 DisplayInformation();
 
 Movie movie = null;
+MovieDatabase database = new MovieDatabase();
+
 var done = false;
 
 do
@@ -154,6 +156,9 @@ int ReadInt32 ( string message, int minimumValue, int maximumValue )
 
 }
 
+//Int32.MinValue;       constant minimum is -2B
+//Int32.MaxValue;       constant minimum is 2B
+
 string ReadString ( string message, bool required )
 {
     Console.Write(message);
@@ -174,7 +179,9 @@ string ReadString ( string message, bool required )
 
 Movie AddMovie ()
 {
-    Movie movie = new Movie ();
+    Movie movie = new Movie ("Title");
+    //movie = new Movie();
+    //movie.Title = "Title";
 
     //string title ="";
     //movie.title = ReadString("Enter a title: ", true);
@@ -186,6 +193,10 @@ Movie AddMovie ()
     movie.RunLength = ReadInt32("Enter a run length (in Minutes): ", 0, 300);
 
     movie.ReleaseYear = ReadInt32("Enter the release year: ", 1900, 2100);
+    if (movie.ReleaseYear >= Movie.YearColorWasIntroduced)
+        Console.WriteLine("Wow that is an old movie");
+
+    //var emptyMovie = Movie.Empty;
 
     movie.Rating = ReadString("Enter the MPAA rating: ", true);
 
@@ -196,6 +207,13 @@ Movie AddMovie ()
 
 Movie GetSelectedMovie()
 {
+    //HACK: for now
+    var item = database.Get(0);
+
+    //object obj = "Hello";             //should not be using object unless desperate, useful to store something when you don't know what it is
+    //obj = 10;                         //one piece of functionality that object provides is "ToString()" = it is a method provided by object and is virtual
+    //obj = 4.15;
+
     return movie;
 }
 
